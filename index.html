@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jumpscare Setan</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .content h1 {
+      font-size: 2em;
+    }
+
+    .jumpscare {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    .jumpscare img {
+      width: 300px;
+      animation: appear 1s ease-out forwards, scare 0.5s ease-in-out 2s forwards;
+    }
+
+    @keyframes appear {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes scare {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      25% {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(0.9);
+      }
+      75% {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    body:hover .jumpscare {
+      display: block;
+      animation: show 0s forwards;
+    }
+
+    @keyframes show {
+      0% {
+        display: block;
+      }
+      100% {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <h1>Selamat datang, jika berani, tunggu beberapa detik...</h1>
+    </div>
+    <div class="jumpscare">
+      <img src="setan.png" alt="Setan" />
+    </div>
+  </div>
+
+  <audio id="scream" src="teriak.mp3" preload="auto"></audio>
+
+  <script>
+    const scream = document.getElementById('scream');
+
+    // Play scream sound after image appears
+    document.body.addEventListener('mouseover', () => {
+      setTimeout(() => {
+        scream.play();
+      }, 2000); // Menunggu 2 detik setelah gambar muncul
+    });
+  </script>
+</body>
+</html>
